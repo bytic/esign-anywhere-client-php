@@ -1,0 +1,50 @@
+{
+  "name": "bytic/esign-anywhere-client-php",
+  "description": "A PHP client for eSignAnyWhere ",
+  "keywords": [
+    "eSignAnyWhere ",
+    "api",
+    "client",
+    "openapi",
+    "swagger",
+    "php"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Gabriel Solomon",
+      "email": "hello@gabrielsolomon.ro"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "ByTIC\\eSignAnyWhere\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ByTIC\\eSignAnyWhere\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": ">= 7.1",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "jane-php/open-api-runtime": "^5.0",
+    "psr/http-client": "^1.0",
+    "php-http/client-common": "^1.9 || 2.0",
+    "php-http/discovery": "^1.7"
+  },
+  "require-dev": {
+    "php-http/guzzle6-adapter": "^2.0",
+    "http-interop/http-factory-guzzle": "^1.0",
+    "vlucas/phpdotenv": "^3.6",
+    "friendsofphp/php-cs-fixer": "^2.13",
+    "phpunit/phpunit": "^8.0"
+  },
+  "conflict": {
+    "php-http/httplug": "< 2.0"
+  }
+}

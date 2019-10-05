@@ -1,0 +1,9 @@
+# Dependencies
+/vendor
+
+# Composer
+composer.lock
+
+# CONFIGURATION
+.env
+.php_cs.cache
