@@ -1,8 +1,12 @@
 <?php
 
-namespace ByTIC\eSignAnyWhere\Normalizer\Authorization;
+namespace ByTIC\eSignAnyWhere\Normalizer;
 
-use ByTIC\eSignAnyWhere\Models\Authorization\Response200;
+use ByTIC\eSignAnyWhere\Models\Response200;
+use Symfony\Component\Serializer\Exception\CircularReferenceException;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Symfony\Component\Serializer\Exception\LogicException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -11,10 +15,10 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
- * Class Response200Normalizer
+ * Class ResponseObjectNormalizer
  * @package ByTIC\eSignAnyWhere\Normalizer
  */
-class Response200Normalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class ResponseObjectNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
@@ -24,7 +28,7 @@ class Response200Normalizer implements DenormalizerInterface, NormalizerInterfac
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === Response200::class;
+        return $format === 'json' && class_exists($type);
     }
 
     /**
@@ -32,7 +36,7 @@ class Response200Normalizer implements DenormalizerInterface, NormalizerInterfac
      */
     public function supportsNormalization($data, $format = null)
     {
-        return get_class($data) === Response200::class;
+        return false;
     }
 
     /**
@@ -40,12 +44,19 @@ class Response200Normalizer implements DenormalizerInterface, NormalizerInterfac
      */
     public function denormalize($data, $type, $format = null, array $context = [])
     {
-        if (!is_bool($data)) {
+        $data = json_decode($data, true);
+
+        if (!is_array($data) or count($data) < 1) {
             return null;
         }
 
-        $object = new Response200();
-        $object->setOk($data);
+        $object = new $type();
+        foreach ($data as $key => $value) {
+            $method = 'set' . $key;
+            if (method_exists($object, $method)) {
+                $object->$method($value);
+            }
+        }
         return $object;
     }
 
@@ -54,15 +65,6 @@ class Response200Normalizer implements DenormalizerInterface, NormalizerInterfac
      */
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = new \stdClass();
-        if (null !== $object->getOk()) {
-            $data->{'ok'} = $object->getOk();
-        }
-        foreach ($object as $key => $value) {
-            if (preg_match('/.*/', $key)) {
-                $data->{$key} = $value;
-            }
-        }
-        return $data;
+        // TODO: Implement normalize() method.
     }
 }

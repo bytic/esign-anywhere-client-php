@@ -2,7 +2,7 @@
 
 namespace ByTIC\eSignAnyWhere\Normalizer;
 
-use ByTIC\eSignAnyWhere\Normalizer\Authorization\Response200Normalizer;
+use ByTIC\eSignAnyWhere\Normalizer\Response200Normalizer;
 
 /**
  * Class NormalizerFactory
@@ -17,6 +17,7 @@ class NormalizerFactory
     {
         $normalizers = [];
         $normalizers[] = new Response200Normalizer();
+        $normalizers[] = new ResponseObjectNormalizer();
         return $normalizers;
     }
 }

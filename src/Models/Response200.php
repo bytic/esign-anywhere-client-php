@@ -1,10 +1,10 @@
 <?php
 
-namespace ByTIC\eSignAnyWhere\Models\Authorization;
+namespace ByTIC\eSignAnyWhere\Models;
 
 /**
  * Class Response200
- * @package ByTIC\eSignAnyWhere\Models\Authorization
+ * @package ByTIC\eSignAnyWhere\Models
  */
 class Response200
 {

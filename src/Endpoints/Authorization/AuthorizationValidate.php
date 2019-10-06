@@ -44,8 +44,8 @@ class AuthorizationValidate extends AbstractPsr7Endpoint
     protected function transformResponseBody(string $body, int $status, SerializerInterface $serializer, string $contentType = null)
     {
         if (200 === $status) {
-            return $serializer->denormalize(true, \ByTIC\eSignAnyWhere\Models\Authorization\Response200::class);
+            return $serializer->denormalize(true, \ByTIC\eSignAnyWhere\Models\Response200::class);
         }
-        return $serializer->denormalize(true, \ByTIC\eSignAnyWhere\Models\Authorization\Response401::class, 'json');
+        return $serializer->denormalize(false, \ByTIC\eSignAnyWhere\Models\Response401::class);
     }
 }
