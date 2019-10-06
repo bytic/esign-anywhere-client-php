@@ -3,6 +3,7 @@
 namespace ByTIC\eSignAnyWhere\Client;
 
 use ByTIC\eSignAnyWhere\Client\Traits\AuthorizationEndpointsTrait;
+use ByTIC\eSignAnyWhere\Client\Traits\EnvelopeEndpointsTrait;
 use ByTIC\eSignAnyWhere\Client\Traits\SspFileEndpointsTrait;
 use ByTIC\eSignAnyWhere\ESignAnyWhereApi;
 
@@ -14,6 +15,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
 {
     use AuthorizationEndpointsTrait;
     use SspFileEndpointsTrait;
+    use EnvelopeEndpointsTrait;
 
     /**
      * @param null $httpClient

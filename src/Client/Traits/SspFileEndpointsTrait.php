@@ -14,7 +14,7 @@ trait SspFileEndpointsTrait
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \JoliCode\Slack\Api\Model\AuthTestGetResponse200|\JoliCode\Slack\Api\Model\AuthTestGetResponsedefault|\Psr\Http\Message\ResponseInterface|null
+     * @return \ByTIC\eSignAnyWhere\Models\SspFile\FileResult|null
      */
     public function sspFileUploadTemporary($file, string $fetch = Client::FETCH_OBJECT)
     {
